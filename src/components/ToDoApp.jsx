@@ -18,11 +18,22 @@ function ToDoApp() {
   }
 
   function handleToDo() {
-    setTodoData((prev) => (
-      [...prev, inputData]
-    ));
+    setTodoData((prev) => {
+      return [
+        ...prev,
+        inputData
+      ]
+    })
     setInputData("");
   }
+
+  // This Is Cool!!!
+  // function handleToDo() {
+  //   setTodoData((prev) => (
+  //     [...prev, inputData]
+  //   ));
+  //   setInputData("");
+  // }
 
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center">
