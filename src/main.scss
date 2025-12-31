@@ -1,0 +1,91 @@
+// $bg-body: #ffa500;
+$bg-body-color: #f7e49a;
+$card-bg: #ffffff;
+$primary-btn: #ffffff;
+
+@import "bootstrap/scss/bootstrap";
+
+body {
+  background-color: $bg-body-color !important;
+  font-family: 'Architects Daughter', cursive;
+}
+
+.notebook-card {
+  background-color: $card-bg;
+  border-radius: 20px;
+
+  background-image: radial-gradient(#d0d0d0 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+
+  padding: 40px;
+  min-height: 400px;
+}
+
+.pin-container {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  align-items: center;
+}
+
+.pin-icon {
+  width: 20px;
+  height: 20px;
+  background-color: #d9534f;
+  border-radius: 50%;
+  position: relative;
+  transform: translate(-50%);
+}
+
+.hanging-line {
+  width: 2px;
+  height: 60px;
+  background-color: #888;
+}
+
+.title-highlight {
+  background-color: #ffcc00;
+  display: inline-block;
+  padding: 5px 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  transform: rotate(-2deg);
+}
+
+.custom-input {
+  border: none;
+  background: transparent;
+  width: 70%;
+  outline: none;
+  border-bottom: 2px dashed #ccc;
+  font-size: 1.2rem;
+  font-family: inherit;
+
+  &::placeholder {
+    color: #bbbbbb;
+  }
+}
+
+.btn-add {
+  background-color: white;
+  border: 1px solid #333;
+  margin-left: 10px; // This is good place to put margin
+  transition: all 0.1s;
+
+  &:active {
+    transform: translate(2px, 2px);
+  }
+}
+
+.todo-list {
+  font-size: 1.5rem;
+  margin-top: 20px;
+
+  li {
+    margin-bottom: 10px;
+  }
+}
