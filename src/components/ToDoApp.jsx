@@ -2,14 +2,27 @@ import { useState } from "react";
 
 function ToDoApp() {
   const [transform, setTransform] = useState("rotate(-2deg)");
+  const [inputData, setInputData] = useState("");
+  const [todoData, setTodoData] = useState([]);
 
   const customStyle = {
     transform: transform
   };
-
   function handleFocus() {setTransform("rotate(2deg)");}
-
   function handleBlur() {setTransform("rotate(-2deg)");}
+
+
+  function handleChange(event) {
+    const {value} = event.target;
+    setInputData(value)
+  }
+
+  function handleToDo() {
+    setTodoData((prev) => (
+      [...prev, inputData]
+    ));
+    setInputData("");
+  }
 
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center">
@@ -35,19 +48,25 @@ function ToDoApp() {
               className="custom-input"
               type="text"
               placeholder="Enter your to do"
+              name="todo"
+              value={inputData}
               onFocus={handleFocus}
               onBlur={handleBlur}
+              onChange={handleChange}
             />
             <button
               className="btn btn-add"
+              onClick={handleToDo}
             >
               Add
             </button>
           </div>
 
-          <div className="text-start ps-4">
+          <div className="text-start">
             <ul className="todo-list">
-              <li>A item</li>
+              {todoData.map((data, index) => (
+                <li key={index}>{data}</li>
+              ))}
             </ul>
           </div>
 
