@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {v4 as uuidv4} from "uuid";
 import ToDoItem from "./ToDoItem";
 
 function ToDoApp() {
@@ -22,7 +23,7 @@ function ToDoApp() {
     setTodoData((prev) => {
       return [
         ...prev,
-        inputData
+        {id: uuidv4(), text: inputData}
       ]
     })
     setInputData("");
@@ -42,9 +43,26 @@ function ToDoApp() {
     // key==="Enter"&&handleToDo();
 
     // This is cool!!!
-    console.log(event.key);
     event.key==="Enter"&&handleToDo();
   }
+
+  function deleteItem(id) {
+    setTodoData((prev) => {
+      // Because already the filter return `array`.
+      return (
+        prev.filter((_,index) => {
+          return (id !== index)
+        })
+      )
+    })
+  }
+
+  // OR
+  // function deleteItem(id) {
+  //   setTodoData((prev) => (
+  //     prev.filter((_,index) => (id !== index))
+  //   ))
+  // }
 
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center">
@@ -88,10 +106,16 @@ function ToDoApp() {
           <div className="text-start">
             <ul className="todo-list">
               {todoData.map((data, index) => (
+                {/* <ToDoItem
+                  key={index}
+                  id={index}
+                  value={data}
+                /> */},
                 <ToDoItem
                   key={index}
                   id={index}
                   value={data}
+                  onChecked={deleteItem}
                 />
               ))}
             </ul>

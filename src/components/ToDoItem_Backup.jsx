@@ -8,25 +8,25 @@ function ToDoItem (props) {
     textDecoration: isCompleted ? "line-through" : "none"
   }
 
+  // function handleClick() {
+  //   isCompleted==="line-through"?setIsCompleted(""):setIsCompleted("line-through");
+  // }
+
+  // More Descriptive
   function toggleComplete() {
     setIsCompleted((prev) => {
       return (!prev)
     });
   }
 
+  // Shortest and cool
+  // function toggleComplete() {
+  //   setIsCompleted(prev => !prev);
+  // }
+
   return (
-    <div className="d-flex justify-content-between gap-2">
-      <li onClick={toggleComplete} style={customStyle}>{props.value}</li>
-      <p
-        className="cursor-pointer"
-        onClick={() => {
-          return (
-            props.onChecked(props.id)
-          )
-        }}
-      >
-        &#120;
-      </p>
+    <div onClick={toggleComplete}>
+      <li key={props.id} style={customStyle}>{props.value}</li>
     </div>
   )
 }
