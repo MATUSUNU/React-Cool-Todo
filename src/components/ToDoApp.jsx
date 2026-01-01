@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ToDoItem from "./ToDoItem";
 
 function ToDoApp() {
   const [transform, setTransform] = useState("rotate(-2deg)");
@@ -35,6 +36,16 @@ function ToDoApp() {
   //   setInputData("");
   // }
 
+  function handleEnter(event) {
+    // console.log(event.nativeEvent.key)
+    // const {key} = event.nativeEvent
+    // key==="Enter"&&handleToDo();
+
+    // This is cool!!!
+    console.log(event.key);
+    event.key==="Enter"&&handleToDo();
+  }
+
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center">
       <div className="col-12 col-md-6 col-lg-4">
@@ -64,6 +75,7 @@ function ToDoApp() {
               onFocus={handleFocus}
               onBlur={handleBlur}
               onChange={handleChange}
+              onKeyUp={handleEnter}
             />
             <button
               className="btn btn-add"
@@ -76,7 +88,11 @@ function ToDoApp() {
           <div className="text-start">
             <ul className="todo-list">
               {todoData.map((data, index) => (
-                <li key={index}>{data}</li>
+                <ToDoItem
+                  key={index}
+                  id={index}
+                  value={data}
+                />
               ))}
             </ul>
           </div>
