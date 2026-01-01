@@ -50,8 +50,8 @@ function ToDoApp() {
     setTodoData((prev) => {
       // Because already the filter return `array`.
       return (
-        prev.filter((_,index) => {
-          return (id !== index)
+        prev.filter((data) => {
+          return (id !== data.id)
         })
       )
     })
@@ -105,16 +105,16 @@ function ToDoApp() {
 
           <div className="text-start">
             <ul className="todo-list">
-              {todoData.map((data, index) => (
+              {todoData.map((data) => (
                 {/* <ToDoItem
                   key={index}
                   id={index}
                   value={data}
                 /> */},
                 <ToDoItem
-                  key={index}
-                  id={index}
-                  value={data}
+                  key={data.id}
+                  id={data.id}
+                  value={data.text}
                   onChecked={deleteItem}
                 />
               ))}
