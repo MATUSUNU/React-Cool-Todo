@@ -1,10 +1,10 @@
 import { useState } from "react";
 import {v4 as uuidv4} from "uuid";
 import ToDoItem from "./ToDoItem";
+import InputArea from "./InputArea";
 
 function ToDoApp() {
   const [transform, setTransform] = useState("rotate(-2deg)");
-  const [inputData, setInputData] = useState("");
   const [todoData, setTodoData] = useState([]);
 
   const customStyle = {
@@ -13,37 +13,13 @@ function ToDoApp() {
   function handleFocus() {setTransform("rotate(2deg)");}
   function handleBlur() {setTransform("rotate(-2deg)");}
 
-
-  function handleChange(event) {
-    const {value} = event.target;
-    setInputData(value)
-  }
-
-  function handleToDo() {
+  function handleToDo(inputData) {
     setTodoData((prev) => {
       return [
         ...prev,
         {id: uuidv4(), text: inputData}
       ]
     })
-    setInputData("");
-  }
-
-  // This Is Cool!!!
-  // function handleToDo() {
-  //   setTodoData((prev) => (
-  //     [...prev, inputData]
-  //   ));
-  //   setInputData("");
-  // }
-
-  function handleEnter(event) {
-    // console.log(event.nativeEvent.key)
-    // const {key} = event.nativeEvent
-    // key==="Enter"&&handleToDo();
-
-    // This is cool!!!
-    event.key==="Enter"&&handleToDo();
   }
 
   function deleteItem(id) {
@@ -56,13 +32,6 @@ function ToDoApp() {
       )
     })
   }
-
-  // OR
-  // function deleteItem(id) {
-  //   setTodoData((prev) => (
-  //     prev.filter((_,index) => (id !== index))
-  //   ))
-  // }
 
   return (
     <div className="container-fluid vh-100 d-flex justify-content-center align-items-center">
@@ -83,43 +52,24 @@ function ToDoApp() {
           </h1>
         </div>
 
-          <div className="mb-4 d-flex justify-content-center align-items-end">
-            <input
-              className="custom-input"
-              type="text"
-              placeholder="Enter your to do"
-              name="todo"
-              value={inputData}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              onChange={handleChange}
-              onKeyUp={handleEnter}
-            />
-            <button
-              className="btn btn-add"
-              onClick={handleToDo}
-            >
-              Add
-            </button>
-          </div>
+        <InputArea
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onSubmit={handleToDo}
+        />
 
-          <div className="text-start">
-            <ul className="todo-list">
-              {todoData.map((data) => (
-                {/* <ToDoItem
-                  key={index}
-                  id={index}
-                  value={data}
-                /> */},
-                <ToDoItem
-                  key={data.id}
-                  id={data.id}
-                  value={data.text}
-                  onChecked={deleteItem}
-                />
-              ))}
-            </ul>
-          </div>
+        <div className="text-start">
+          <ul className="todo-list">
+            {todoData.map((data) => (
+              <ToDoItem
+                key={data.id}
+                id={data.id}
+                value={data.text}
+                onChecked={deleteItem}
+              />
+            ))}
+          </ul>
+        </div>
 
       </div>
       </div>
